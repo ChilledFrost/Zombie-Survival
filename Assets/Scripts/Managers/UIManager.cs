@@ -29,7 +29,7 @@ public class UIManager : MonoBehaviourPunCallbacks
     public void ManageTimerWaveText(int currentTime) => waveText.text = $"{newWaveText}{currentTime}";
 
     [PunRPC]
-    public void ManageZombieRemaningText(int zombieRemaning) => zombieRemainingText.text = $"Zombies Remaning: {zombieRemainingText}";
+    public void ManageZombieRemaningText(int zombieRemaning) => zombieRemainingText.text = $"Zombies Remaning: {zombieRemaning}";
 
     public void ManageAmmoUI(int currentAmmo) => ammoText.text = $"{currentAmmo}/6";
 

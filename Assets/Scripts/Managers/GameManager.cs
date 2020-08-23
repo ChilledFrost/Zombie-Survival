@@ -24,9 +24,9 @@ public class GameManager : MonoBehaviourPunCallbacks
     private void Start()
     {
         UIManager.instance.photonView.RPC("ManageCurrentWaveText", RpcTarget.All, currentWave);
-        StartCoroutine(StartTimerForNextWave());
+        GameManager.instance.photonView.RPC("StartTimerForNextWave", RpcTarget.All);
     }
-
+    [PunRPC]
     public IEnumerator StartTimerForNextWave()
     {
         int currentTime = 10;
@@ -37,14 +37,22 @@ public class GameManager : MonoBehaviourPunCallbacks
             currentTime--;
             yield return new WaitForSeconds(1);
         }
-        StartNextWave();
+        GameManager.instance.photonView.RPC("StartNextWave", RpcTarget.All);
     }
 
+    [PunRPC]
     public void StartNextWave()
     {
         currentWave++;
+        print(currentWave);
         UIManager.instance.photonView.RPC("ManageCurrentWaveText", RpcTarget.All, currentWave);
         WaveManager.instance.StartWave(currentWave);
+    }
+
+    // UI
+    public void UpdateZombieRemainingUI(int currentZombies)
+    {
+        UIManager.instance.photonView.RPC("ManageZombieRemaningText", RpcTarget.All, currentZombies);
     }
 
 }
