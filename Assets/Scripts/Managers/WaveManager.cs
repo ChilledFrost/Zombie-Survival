@@ -23,7 +23,7 @@ public class WaveManager : MonoBehaviour
     {
         for (int i = 0; i < amountOfZombies; i++)
         {
-            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Zombie"), spawnPositions[Random.Range(0, spawnPositions.Length)].position, Quaternion.identity);
+            GameObject zombie = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Zombie"), spawnPositions[Random.Range(0, spawnPositions.Length)].position, Quaternion.identity);
             yield return new WaitForSeconds(timeBetweenZombiesSpawn);
         }
         
